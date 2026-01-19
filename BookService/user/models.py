@@ -16,9 +16,12 @@ class User(AbstractUser):
  password = models.CharField(max_length=128)
  role = models.CharField(choices=ROLE_CH0ICES, max_length=10, default='client')
  phone_number = models.CharField(max_length=11)
- username = models.CharField(max_length=100, unique=False)
+ username = models.CharField(max_length=100, unique=True)
 
 
+ REQUIRED_FIELDS = []
  USERNAME_FIELD = 'email'
+
+
 
 
