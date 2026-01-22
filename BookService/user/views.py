@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from rest_framework import viewsets
+from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework import status
@@ -12,6 +13,7 @@ from user.serializers import UserRegisterSerializer
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserRegisterSerializer
+    parser_classes = (MultiPartParser, FormParser)
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)

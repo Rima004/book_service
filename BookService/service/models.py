@@ -15,7 +15,7 @@ class Service(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
     is_active = models.BooleanField(default=True)
-    average_duration = models.DurationField()
+    average_duration = models.DurationField(null=True)
 
 
 

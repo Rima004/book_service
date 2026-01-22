@@ -17,6 +17,7 @@ class User(AbstractUser):
  role = models.CharField(choices=ROLE_CH0ICES, max_length=10, default='client')
  phone_number = models.CharField(max_length=11)
  username = models.CharField(max_length=100, unique=True)
+ image = models.ImageField(upload_to='images/',blank=True,null=True)
 
 
  REQUIRED_FIELDS = []
