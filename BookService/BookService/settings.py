@@ -17,6 +17,12 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+SPECTACULAR_SETTINGS = {
+    'COMPONENT_SPLIT_REQUEST': True,
+}
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
@@ -42,6 +48,7 @@ INSTALLED_APPS = [
      'rest_framework',
     'drf_spectacular',
     'rest_framework_simplejwt',
+'django_filters',
 
 
     'user',
@@ -124,6 +131,10 @@ USE_I18N = True
 
 USE_TZ = True
 AUTH_USER_MODEL = 'user.User'
+# Если используется первый вариант в связке всего Docker compose:
+CELERY_BROKER_URL = 'redis://redis:6379/0'  # redis = имя контейнера в docker-compose
+CELERY_RESULT_BACKEND = 'redis://redis:6379/0'
+
 
 
 # Static files (CSS, JavaScript, Images)
@@ -134,7 +145,9 @@ REST_FRAMEWORK = {
 'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-    )
+    ),
+ 'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
+
 
 }
 
@@ -185,3 +198,15 @@ SIMPLE_JWT = {
     "REVOKE_TOKEN_CLAIM": "hash_password",
     "CHECK_USER_IS_ACTIVE": True,
 }
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'pervuncukarina@gmail.com'
+EMAIL_HOST_PASSWORD = 'fgnx rvgi lsqk utsb'
+
+
+# Для разработки (вывод писем в консоль)
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
