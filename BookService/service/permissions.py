@@ -21,7 +21,6 @@ class CheckRole(permissions.BasePermission):
                 obj.provider == request.user
             )
         return True
-from rest_framework import permissions
 
 class PermissionsForBooking(permissions.BasePermission):
 

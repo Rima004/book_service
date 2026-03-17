@@ -37,7 +37,7 @@ SPECTACULAR_SETTINGS = {
 SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost').split(',')
 
 
 # Application definition
@@ -49,12 +49,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-     'rest_framework',
+    'rest_framework',
     'drf_spectacular',
     'rest_framework_simplejwt',
-'django_filters',
-'django_celery_beat',
-
+    'django_filters',
+    'django_celery_beat',
+    'phonenumber_field',
 
     'user',
     'category',
