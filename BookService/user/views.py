@@ -6,7 +6,7 @@ from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework import status
 from user.models import User
-from user.serializers import UserRegisterSerializer,UserReadSerializer
+from user.serializers import UserRegisterSerializer,UserReadSerializer,UserUpdateSerializer
 from .permissions import UserPermission
 
 
@@ -19,6 +19,8 @@ class UserViewSet(viewsets.ModelViewSet):
     def get_serializer_class(self):
         if self.action == 'create':
             return UserRegisterSerializer
+        elif self.action == 'update' or self.action == 'partial_update':
+            return UserUpdateSerializer
         return UserReadSerializer
 
     def create(self, request, *args, **kwargs):

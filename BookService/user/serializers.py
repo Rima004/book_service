@@ -31,6 +31,7 @@ class UserReadSerializer(serializers.ModelSerializer):
         fields = ['first_name', 'last_name', 'email','role','phone_number']
 
 
+
 class UserUpdateSerializer(serializers.ModelSerializer):
 
     class Meta:
